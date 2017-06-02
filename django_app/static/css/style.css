@@ -1,0 +1,11 @@
+.header {
+    padding-bottom: 10px;
+
+    }
+
+.post-list > .post {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid #999;
+}
+
