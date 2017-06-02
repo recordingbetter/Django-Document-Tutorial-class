@@ -17,6 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from polls import urls as polls_urls
 
+
+# admin의 타이틀을 변경
+admin.site.site_title = "test"
+admin.site.index_title = "werwrwerwe"
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'^polls/', include('polls.urls')),
