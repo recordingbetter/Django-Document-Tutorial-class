@@ -1,4 +1,3 @@
-
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.http import HttpResponse, Http404
@@ -25,17 +24,13 @@ def detail(request, question_id):
     #     raise Http404('Question does not exist.')
     # else:
     # get_object_
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk = question_id)
     # question.choice_set. (아래와 같다)
     # Choice.objects.filter(question=question).
     context = {
         'question': question,
     }
     return render(request, 'polls/detail.html', context)
-
-
-def results(request, question_id):
-    return HttpResponse('results of question {}'.format(question_id))
 
 
 def vote(request, question_id):
@@ -45,7 +40,7 @@ def vote(request, question_id):
         try:
             choice_id = data['choice']
             # choice 키에 해당하는 Choice 인스턴스의 vote 값을 1증가시키고 데이터베이스에 반영
-            choice = Choice.objects.get(id=choice_id)
+            choice = Choice.objects.get(id = choice_id)
             choice.votes += 1
             choice.save()
             return redirect('polls:results', question_id)
@@ -61,3 +56,14 @@ def vote(request, question_id):
     else:
         return HttpResponse("You're voting")
 
+
+def results(request, question_id):
+    # detail.html 파일을 약간 수정해서 results.html 을 만들고 질문에 대한 모든 선택 사항의 선택수(votes)를 출력
+    question = get_object_or_404(Question, pk=question_id)
+    context ={
+        'question': question
+    }
+    # detail.html 내부 question 을 출력
+    # 해당 question 의 모든 choice 들 출력
+    # loop 돌며 각 choice 의 제목과 votes 를 출력
+    return render(request, 'polls/results.html', context)

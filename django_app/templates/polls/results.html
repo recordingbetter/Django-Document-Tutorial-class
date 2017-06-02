@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ question.question_text }}</h1>
+
+    {% for choice in question.choice_set.all %}
+        <li>
+            <span>{{ choice.choice_text }} : {{ choice.votes }}</span>
+        </li>
+    {% endfor %}
+    <a href="{% url 'polls:detail' question.id %}">vote again</a>
+
+</body>
+</html>
